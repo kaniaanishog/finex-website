@@ -635,3 +635,94 @@ main {
   font-size: 0.9rem;
   color: var(--color-text);
 }
+
+
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.insta-embed {
+  width: 100%;
+}
+
+/* Optional: make embeds a bit softer in the layout */
+.insta-embed .instagram-media {
+  box-shadow: 0 10px 24px rgba(15, 76, 92, 0.06);
+  border-radius: 18px !important;
+  overflow: hidden;
+}
+
+.navbar__brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-muted);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.nav-link--dropdown::after {
+  content: "▾";
+  font-size: 0.65rem;
+  margin-left: 0.25rem;
+}
+
+/* Dropdown panel */
+.nav-dropdown {
+  position: absolute;
+  top: 140%;
+  left: 0;
+  min-width: 220px;
+  padding: 0.6rem 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgba(15, 23, 42, 0.16);
+  display: none;
+  z-index: 200;
+}
+
+.nav-dropdown a {
+  display: block;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.nav-dropdown a:hover {
+  background-color: #f3f4f6;
+  color: var(--color-primary);
+}
+
+/* Show on hover (desktop) */
+.nav-item--dropdown:hover .nav-dropdown {
+  display: block;
+}
+
+.insta-disclaimer {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+

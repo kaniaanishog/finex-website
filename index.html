@@ -17,19 +17,37 @@
 
   <!-- NAVBAR -->
   <header class="navbar">
+  <a href="index.html#top" class="navbar__brand-link">
     <div class="navbar__brand">
-      <!-- Replace with real logo later -->
       <span class="navbar__logo-mark">F</span>
       <span class="navbar__logo-text">Finex Solutions</span>
     </div>
-    <nav class="navbar__nav">
-      <a href="#services">Services</a>
-      <a href="#why">Why Finex</a>
-      <a href="#process">Process</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a href="#contact" class="btn btn--primary navbar__cta">Book Consultation</a>
-  </header>
+  </a>
+
+  <nav class="navbar__nav">
+    <!-- Services dropdown -->
+    <div class="nav-item nav-item--dropdown">
+      <button class="nav-link nav-link--dropdown" type="button">
+        Services
+      </button>
+      <div class="nav-dropdown">
+        <a href="services-loans.html">Loans &amp; Credit</a>
+        <a href="services-forex.html">Forex &amp; Travel Currency</a>
+        <a href="services-insurance.html">Insurance Planning</a>
+        <a href="services-accounting.html">Accounting &amp; Taxation</a>
+        <a href="services-business-consulting.html">Business &amp; Startup Consulting</a>
+        <a href="services-student-sop.html">Student &amp; SOP Assistance</a>
+      </div>
+    </div>
+
+    <a class="nav-link" href="why-finex.html">Why Finex</a>
+    <a class="nav-link" href="index.html#process">Process</a>
+    <a class="nav-link" href="index.html#contact">Contact</a>
+  </nav>
+
+  <a href="index.html#contact" class="btn btn--primary navbar__cta">Book Consultation</a>
+</header>
+
 
   <main>
 
@@ -156,36 +174,47 @@
       <div class="section__inner">
         <h2 class="section__title">What Our Clients Say</h2>
         <p class="section__subtitle">
-          Real experiences from individuals and businesses we’ve helped with their finances.
+          A few words from people who trusted Finex Solutions with their money decisions.
         </p>
 
         <div class="grid grid--testimonials">
           <article class="card card--testimonial">
             <p class="card__quote">
-              “Finex handled our home loan from start to finish. We got clarity on all options
-              and the paperwork was surprisingly smooth.”
+              “We were confused between multiple banks for our home loan. Finex compared all
+              the options, explained every fee clearly and handled the paperwork.
+              Our approval came faster than we expected.”
             </p>
-            <p class="card__author">Rahul &amp; Ananya · Home Loan Clients</p>
+            <p class="card__author">Rahul &amp; Ananya · Home Loan &amp; Insurance</p>
           </article>
 
           <article class="card card--testimonial">
             <p class="card__quote">
-              “As a small business owner I needed help with working capital and GST. The team
-              set up everything and still supports us every quarter.”
+              “For my son’s studies abroad, they helped us with education loan planning,
+              forex and insurance in one place. We didn’t have to run to different
+              agents or banks.”
+            </p>
+            <p class="card__author">Mrs. Shah · Parent of Overseas Student</p>
+          </article>
+
+          <article class="card card--testimonial">
+            <p class="card__quote">
+              “As a small business we needed working capital and someone to keep our GST and
+              accounting in control. Finex set up a system and now compliance is not a headache.”
             </p>
             <p class="card__author">K. Mehta · SME Owner</p>
           </article>
 
           <article class="card card--testimonial">
             <p class="card__quote">
-              “They arranged forex, insurance and guidance for my daughter’s education abroad.
-              I felt informed instead of overwhelmed.”
+              “The team is honest in telling what is really needed and what is not. Their
+              mix of consulting plus execution makes it easy to take decisions with confidence.”
             </p>
-            <p class="card__author">S. Iyer · Parent of Overseas Student</p>
+            <p class="card__author">Startup Founder · Business Consultation</p>
           </article>
         </div>
       </div>
     </section>
+
 
     <!-- PROCESS SECTION -->
     <section class="section section--striped" id="process">
@@ -225,43 +254,46 @@
       </div>
     </section>
 
+
         <!-- INSTAGRAM REELS SECTION -->
     <section class="section" id="instagram">
       <div class="section__inner">
         <h2 class="section__title">From Our Instagram</h2>
         <p class="section__subtitle">
-          Short reels where we explain loans, forex, insurance and money tips in a simple way.
-          Tap to watch them directly on Instagram.
+          Short reels where we simplify loans, forex, insurance and money tips. 
+          Watch a preview below or open them directly on Instagram.
         </p>
 
-        <div class="grid grid--reels">
-          <!-- Replace href values with real reel links from @finexsolutions -->
-          <a href="https://www.instagram.com/reel/DPQ78i9DEBP/?igsh=dDVlemg2emFpejY2" target="_blank" class="reel-card">
-            <div class="reel-card__thumb">
-              <span class="reel-card__badge">Reel</span>
-            </div>
-            <div class="reel-card__body">
-              <p>Basics of Home Loan Eligibility</p>
-            </div>
-          </a>
+        <div class="insta-grid">
+          <!-- Reel 1 -->
+          <div class="insta-embed">
+            <blockquote 
+              class="instagram-media" 
+              data-instgrm-permalink="https://www.instagram.com/reel/DPQ78i9DEBP/?igsh=dDVlemg2emFpejY2" 
+              data-instgrm-version="14"
+              style="background:#fff; border:0; margin:0; max-width:540px; width:100%;">
+            </blockquote>
+          </div>
 
-          <a href="https://www.instagram.com/reel/REEL_ID_2/" target="_blank" class="reel-card">
-            <div class="reel-card__thumb">
-              <span class="reel-card__badge">Reel</span>
-            </div>
-            <div class="reel-card__body">
-              <p>Forex Tips for International Students</p>
-            </div>
-          </a>
+          <!-- Reel 2 -->
+          <div class="insta-embed">
+            <blockquote 
+              class="instagram-media" 
+              data-instgrm-permalink="https://www.instagram.com/reel/DPY6VgDDPmb/?igsh=MXFrMWlpYjZnbmhuaA==" 
+              data-instgrm-version="14"
+              style="background:#fff; border:0; margin:0; max-width:540px; width:100%;">
+            </blockquote>
+          </div>
 
-          <a href="https://www.instagram.com/reel/REEL_ID_3/" target="_blank" class="reel-card">
-            <div class="reel-card__thumb">
-              <span class="reel-card__badge">Reel</span>
-            </div>
-            <div class="reel-card__body">
-              <p>Why Insurance is Part of Wealth Building</p>
-            </div>
-          </a>
+          <!-- Reel 3 -->
+          <div class="insta-embed">
+            <blockquote 
+              class="instagram-media" 
+              data-instgrm-permalink="https://www.instagram.com/reel/DPynavijk70/?igsh=YzdzN2lsYjZkYzhv" 
+              data-instgrm-version="14"
+              style="background:#fff; border:0; margin:0; max-width:540px; width:100%;">
+            </blockquote>
+          </div>
         </div>
 
         <div style="margin-top:1.5rem;">
@@ -269,8 +301,17 @@
             Visit Our Instagram
           </a>
         </div>
+        <p class="insta-disclaimer">
+          Content courtesy
+          <a href="https://www.instagram.com/finexsolutions/" target="_blank">@finexsolutions</a>
+          on Instagram.
+        </p>
+      
       </div>
+        
     </section>
+
+
 
 
     <!-- CONTACT SECTION -->
@@ -289,7 +330,11 @@
           </div>
         </div>
 
-        <form class="form">
+        <form class="form"
+              action="mailto:shivang.finexsolutions@gmail.com"
+              method="POST"
+              enctype="text/plain">
+
           <div class="form__row">
             <div class="form__field">
               <label for="name">Name</label>
@@ -325,7 +370,13 @@
           </div>
 
           <!-- For now, this form is static; we can wire it to Formspree or similar later -->
-          <button type="submit" class="btn btn--primary btn--block">Submit Enquiry</button>
+          <button type="submit" class="btn btn--primary btn--block">
+            Submit via Email
+          </button>
+
+          <a href="#" id="whatsapp-btn" class="btn btn--secondary btn--block" style="margin-top:0.6rem;">
+            Send via WhatsApp
+          </a>
         </form>
       </div>
     </section>
@@ -341,6 +392,36 @@
       </p>
     </div>
   </footer>
+  <script async src="https://www.instagram.com/embed.js"></script>
 
+  <script>
+    // WhatsApp integration for contact form
+    (function () {
+      var waBtn = document.getElementById('whatsapp-btn');
+      if (!waBtn) return;
+
+      waBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        var name    = document.getElementById('name').value || "";
+        var phone   = document.getElementById('phone').value || "";
+        var email   = document.getElementById('email').value || "";
+        var service = document.getElementById('service').value || "";
+        var message = document.getElementById('message').value || "";
+
+        var text = "Hi, I would like to connect with Finex Solutions.%0A%0A"
+          + "Name: " + encodeURIComponent(name) + "%0A"
+          + "Mobile: " + encodeURIComponent(phone) + "%0A"
+          + "Email: " + encodeURIComponent(email) + "%0A"
+          + "Service: " + encodeURIComponent(service) + "%0A"
+          + "Message: " + encodeURIComponent(message);
+
+        var whatsappNumber = "918320146960"; // TODO: replace with actual number, e.g. 919876543210
+        var url = "https://wa.me/" + whatsappNumber + "?text=" + text;
+
+        window.open(url, "_blank");
+      });
+    })();
+  </script>
 </body>
 </html>
