@@ -813,6 +813,7 @@ main {
 
   .navbar__logo-text {
     font-size: 1rem;
+    justify-content: center; 
     font-weight: 600;
     letter-spacing: 1px;
   }
