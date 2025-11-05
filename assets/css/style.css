@@ -869,7 +869,7 @@ main {
 }
 
 .partners__logos img {
-  height: 28px;
+  height: 32px;
   width: auto;
   object-fit: contain;
   filter: grayscale(0.1);
