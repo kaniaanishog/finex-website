@@ -436,24 +436,24 @@
 
 
     <script>
-    // --- SMART STICKY NAVBAR ---
-    let lastScrollTop = 0;
-    const navbar = document.querySelector(".navbar");
+      // --- SMART STICKY NAVBAR ---
+      let lastScrollTop = 0;
+      const navbar = document.querySelector(".navbar");
 
-    window.addEventListener("scroll", function() {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      window.addEventListener("scroll", function() {
+        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (currentScroll > lastScrollTop && currentScroll > 100) {
-        // user scrolled down — hide navbar
-        navbar.classList.add("navbar--hidden");
-      } else {
-        // user scrolled up — show navbar
-        navbar.classList.remove("navbar--hidden");
-      }
+        if (currentScroll > lastScrollTop && currentScroll > 100) {
+          // user scrolled down — hide navbar
+          navbar.classList.add("navbar--hidden");
+        } else {
+          // user scrolled up — show navbar
+          navbar.classList.remove("navbar--hidden");
+        }
 
-      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-    });
-  </script>
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+      });
+    </script>
 
 
 
