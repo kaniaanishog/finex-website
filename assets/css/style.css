@@ -789,6 +789,7 @@ main {
     justify-content: center;   /* vertically center */
     text-align: center;
     padding: 1rem 0;
+    
   }
 
   .navbar__brand-link {
@@ -883,9 +884,13 @@ main {
 
 @media (max-width: 768px) {
   .navbar {
-    background-color: #ffffffee; /* subtle translucent background */
-    backdrop-filter: blur(8px);
+    background-color: #071f27; /* subtle translucent background */
+    backdrop-filter: none; /* no blur for better readability */
   }
+}
+
+#instagram {
+  scroll-margin-top: 80px;  /* match ~navbar height */
 }
 
 
