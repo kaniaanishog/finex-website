@@ -397,12 +397,20 @@
         </div>
 
         <!-- RIGHT SIDE CAROUSEL -->
-        <div class="insta-carousel" id="insta-carousel">
-          <!-- Reel placeholders -->
-          <div class="insta-reel" data-url="https://www.instagram.com/reel/DALmTcyOZ58/"></div>
-          <div class="insta-reel" data-url="https://www.instagram.com/reel/C89ljf3NC48/"></div>
-          <div class="insta-reel" data-url="https://www.instagram.com/reel/DPynavijk70/"></div>
+        <div class="reel-carousel">
+          <div class="reel-track">
+            <div class="reel-item">
+              <iframe src="https://www.instagram.com/reel/DALmTcyOZ58/embed" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="reel-item">
+              <iframe src="https://www.instagram.com/reel/C89ljf3NC48/embed" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="reel-item">
+              <iframe src="https://www.instagram.com/reel/DPynavijk70/embed" frameborder="0" allowfullscreen></iframe>
+            </div>
+          </div>
         </div>
+
 
         
 
@@ -522,59 +530,50 @@
       });
     })();
   </script>
+  
+  <script>
+    const track = document.querySelector('.reel-track');
+    const items = document.querySelectorAll('.reel-item');
+    let current = 0;
+    let startX = 0;
+    let isDragging = false;
 
-    <script>
-      // --- SMART STICKY NAVBAR ---
-      let lastScrollTop = 0;
-      const navbar = document.querySelector(".navbar");
+    function updateSlide() {
+      track.style.transform = `translateX(-${current * 100}%)`;
+    }
 
-      window.addEventListener("scroll", function() {
-        const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+    // Auto-advance every 6s
+    let autoplay = setInterval(() => {
+      current = (current + 1) % items.length;
+      updateSlide();
+    }, 6000);
 
-        if (currentScroll > lastScrollTop && currentScroll > 100) {
-          // user scrolled down — hide navbar
-          navbar.classList.add("navbar--hidden");
+    // Touch swipe support
+    track.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      clearInterval(autoplay);
+    });
+
+    track.addEventListener('touchend', (e) => {
+      let endX = e.changedTouches[0].clientX;
+      let diff = startX - endX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          current = (current + 1) % items.length;
         } else {
-          // user scrolled up — show navbar
-          navbar.classList.remove("navbar--hidden");
+          current = (current - 1 + items.length) % items.length;
         }
-        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-      });
-    </script>
-
-    <script>
-      const reels = document.querySelectorAll(".insta-reel");
-      let currentReel = 0;
-
-      function loadInstagramEmbed(div, url) {
-        div.innerHTML = `
-          <blockquote class="instagram-media"
-            data-instgrm-permalink="${url}"
-            data-instgrm-version="14"
-            style="background:#fff; border:0; margin:0; width:100%; max-width:320px;">
-          </blockquote>`;
-        if (window.instgrm) {
-          window.instgrm.Embeds.process();
-        }
+        updateSlide();
       }
 
-      function showReel(index) {
-        reels.forEach((reel, i) => {
-          reel.classList.remove("active");
-          if (i === index) {
-            reel.classList.add("active");
-            loadInstagramEmbed(reel, reel.dataset.url);
-          }
-        });
-      }
-
-      showReel(currentReel); // Show first reel
-
-      setInterval(() => {
-        currentReel = (currentReel + 1) % reels.length;
-        showReel(currentReel);
+      autoplay = setInterval(() => {
+        current = (current + 1) % items.length;
+        updateSlide();
       }, 6000);
-    </script>
+    });
+  </script>
+
 
 
 
