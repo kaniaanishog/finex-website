@@ -381,60 +381,56 @@
 
 
         <!-- INSTAGRAM REELS SECTION -->
-    <section class="section" id="instagram">
-      <div class="section__inner">
-        <h2 class="section__title">From Our Instagram</h2>
-        <p class="section__subtitle">
-          Short reels where we simplify loans, forex, insurance and money tips. 
-          Watch a preview below or open them directly on Instagram.
-        </p>
-
-        <div class="insta-grid">
-          <!-- Reel 1 -->
-          <div class="insta-embed">
-            <blockquote 
-              class="instagram-media" 
-              data-instgrm-permalink="https://www.instagram.com/reel/DALmTcyOZ58/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" 
-              data-instgrm-version="14"
-              style="background:#fff; border:0; margin:0; max-width:540px; width:100%;">
-            </blockquote>
-          </div>
-
-          <!-- Reel 2 -->
-          <div class="insta-embed">
-            <blockquote 
-              class="instagram-media" 
-              data-instgrm-permalink="https://www.instagram.com/reel/C89ljf3NC48/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" 
-              data-instgrm-version="14"
-              style="background:#fff; border:0; margin:0; max-width:540px; width:100%;">
-            </blockquote>
-          </div>
-
-          <!-- Reel 3 -->
-          <div class="insta-embed">
-            <blockquote 
-              class="instagram-media" 
-              data-instgrm-permalink="https://www.instagram.com/reel/DPynavijk70/?igsh=YzdzN2lsYjZkYzhv" 
-              data-instgrm-version="14"
-              style="background:#fff; border:0; margin:0; max-width:540px; width:100%;">
-            </blockquote>
-          </div>
-        </div>
-
-        <div style="margin-top:1.5rem;">
+    <section class="section section--cta" id="instagram">
+      <div class="section__inner section__inner--cta">
+        
+        <!-- LEFT SIDE TEXT -->
+        <div class="cta__text">
+          <h2 class="section__title">From Our Instagram</h2>
+          <p class="section__subtitle">
+            We simplify loans, forex, insurance and money tips through short reels.
+            Watch our latest video tips to understand finances better.
+          </p>
           <a href="https://www.instagram.com/finexsolutions/" target="_blank" class="btn btn--secondary">
-            Visit Our Instagram
+            Follow Us on Instagram
           </a>
         </div>
-        <p class="insta-disclaimer">
-          Content courtesy
-          <a href="https://www.instagram.com/finexsolutions/" target="_blank">@finexsolutions</a>
-          on Instagram.
-        </p>
-      
+
+        <!-- RIGHT SIDE CAROUSEL -->
+        <div class="carousel-container">
+          <div class="carousel-track">
+            <!-- Reel 1 -->
+            <div class="carousel-item">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/reel/DALmTcyOZ58/?utm_source=ig_web_copy_link"
+                data-instgrm-version="14"
+                style="background:#fff; border:0; margin:0; width:100%; max-width:300px;">
+              </blockquote>
+            </div>
+
+            <!-- Reel 2 -->
+            <div class="carousel-item">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/reel/C89ljf3NC48/?utm_source=ig_web_copy_link"
+                data-instgrm-version="14"
+                style="background:#fff; border:0; margin:0; width:100%; max-width:300px;">
+              </blockquote>
+            </div>
+
+            <!-- Reel 3 -->
+            <div class="carousel-item">
+              <blockquote class="instagram-media"
+                data-instgrm-permalink="https://www.instagram.com/reel/DPynavijk70/?igsh=YzdzN2lsYjZkYzhv"
+                data-instgrm-version="14"
+                style="background:#fff; border:0; margin:0; width:100%; max-width:300px;">
+              </blockquote>
+            </div>
+          </div>
+        </div>
+
       </div>
-        
     </section>
+
 
 
 
@@ -567,6 +563,58 @@
         lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
       });
     </script>
+
+    <script>
+      const track = document.querySelector('.carousel-track');
+      const items = document.querySelectorAll('.carousel-item');
+      let currentIndex = 0;
+      let startX = 0;
+      let isDragging = false;
+
+      function showSlide(index) {
+        track.style.transform = `translateX(-${index * 100}%)`;
+      }
+
+      // Auto-scroll every 6 seconds
+      let autoScroll = setInterval(() => {
+        currentIndex = (currentIndex + 1) % items.length;
+        showSlide(currentIndex);
+      }, 6000);
+
+      // Touch events for swipe
+      track.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        clearInterval(autoScroll); // pause auto-scroll on touch
+      });
+
+      track.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        const endX = e.changedTouches[0].clientX;
+        const diffX = startX - endX;
+
+        if (Math.abs(diffX) > 50) {
+          if (diffX > 0) {
+            // swipe left
+            currentIndex = (currentIndex + 1) % items.length;
+          } else {
+            // swipe right
+            currentIndex = (currentIndex - 1 + items.length) % items.length;
+          }
+          showSlide(currentIndex);
+        }
+
+        // resume auto-scroll
+        autoScroll = setInterval(() => {
+          currentIndex = (currentIndex + 1) % items.length;
+          showSlide(currentIndex);
+        }, 6000);
+
+        isDragging = false;
+      });
+    </script>
+
+
 
 </body>
 </html>
