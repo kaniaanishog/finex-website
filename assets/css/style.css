@@ -903,3 +903,45 @@ main {
   transform: translateY(-100%);
   box-shadow: none;
 }
+
+
+
+
+/* =======================================
+   Instagram Carousel 
+   ======================================= */
+
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  max-width: 320px;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-item {
+  min-width: 100%;
+  flex: 0 0 auto;
+
+}
+
+.insta-carousel {
+  max-width: 320px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.insta-reel {
+  display: none;
+}
+
+.insta-reel.active {
+  display: block;
+}
+
