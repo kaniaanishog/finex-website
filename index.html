@@ -528,12 +528,12 @@
     });
   </script>
 
-  <script>
+ 
     // ==============================
     // Instagram Reel Carousel
     // ==============================
-
-    // 1. List of reels
+  <script>
+    // List of reels to rotate through
     const reelUrls = [
       "https://www.instagram.com/reel/DALmTcyOZ58/embed",
       "https://www.instagram.com/reel/C89ljf3NC48/embed",
@@ -541,80 +541,47 @@
     ];
 
     let reelIndex = 0;
-    let autoplayEnabled = true;
-    let autoplayTimer = null;
-
     const reelFrame = document.getElementById("reel-frame");
     const prevBtn   = document.getElementById("prev-btn");
     const nextBtn   = document.getElementById("next-btn");
+    const carouselWrapper = document.querySelector(".carousel-wrapper");
 
-    // Show given reel by index, wrapping around
+    // Show a reel by index (with wrap-around)
     function showReel(index) {
       reelIndex = (index + reelUrls.length) % reelUrls.length;
       reelFrame.src = reelUrls[reelIndex];
     }
 
-    function nextReel() {
-      showReel(reelIndex + 1);
-    }
-
-    function prevReel() {
+    // Manual navigation buttons
+    prevBtn.addEventListener("click", () => {
       showReel(reelIndex - 1);
-    }
-
-    // 2. Autoplay logic (every 6 seconds)
-    function startAutoplay() {
-      return setInterval(() => {
-        if (autoplayEnabled) {
-          nextReel();
-        }
-      }, 6000);
-    }
-
-    function pauseAutoplay() {
-      autoplayEnabled = false;
-      clearInterval(autoplayTimer);
-    }
-
-    function resumeAutoplay() {
-      if (!autoplayEnabled) {
-        autoplayEnabled = true;
-        autoplayTimer = startAutoplay();
-      }
-    }
-
-    // Start autoplay on page load
-    autoplayTimer = startAutoplay();
-
-    // 3. Smart autoplay toggle:
-    //    Every click on the iframe toggles autoplay.
-    //    In practice:
-    //      - First tap (play)  -> pause autoplay
-    //      - Second tap (pause)-> resume autoplay
-    reelFrame.addEventListener("click", () => {
-      if (autoplayEnabled) {
-        pauseAutoplay();
-      } else {
-        resumeAutoplay();
-      }
+      stopAutoplay();      // user is interacting → no more auto-advance
     });
 
-    // 4. Previous / Next buttons under the reel
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        pauseAutoplay();  // user is manually browsing
-        prevReel();
-      });
+    nextBtn.addEventListener("click", () => {
+      showReel(reelIndex + 1);
+      stopAutoplay();
+    });
+
+    // --- Autoplay logic ---
+
+    let autoplayTimer = setInterval(() => {
+      showReel(reelIndex + 1);
+    }, 6000); // 6 seconds
+
+    function stopAutoplay() {
+      if (autoplayTimer) {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
     }
 
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        pauseAutoplay();
-        nextReel();
-      });
-    }
+    // Any interaction with the reel area stops autoplay:
+    ["click", "touchstart", "mouseenter", "focus"].forEach(evt => {
+      reelFrame.addEventListener(evt, stopAutoplay);
+      carouselWrapper.addEventListener(evt, stopAutoplay);
+    });
   </script>
-
 
 
 </body>
