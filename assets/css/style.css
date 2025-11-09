@@ -961,15 +961,55 @@ main {
   border: none;
 }
 
+/* Single reel container + controls */
+.carousel-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* keep everything centered */
+}
+
+/* Reel frame area */
 .insta-swapper {
   width: 100%;
   max-width: 340px;
-  margin: auto;
-  height: 500px;
+  margin: 0 auto;
 }
 
 .insta-swapper iframe {
   width: 100%;
-  height: 100%;
+  height: 500px;
   border: none;
+}
+
+/* Controls row directly under the reel */
+.carousel-controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: 0.6rem;
+}
+
+/* Previous / Next buttons */
+.carousel-controls button {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  cursor: pointer;
+  font-size: 1.1rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.1s ease;
+}
+
+.carousel-controls button:hover {
+  background: #f3f4f6;
+  box-shadow: 0 4px 10px rgba(15, 76, 92, 0.12);
+  transform: translateY(-1px);
 }

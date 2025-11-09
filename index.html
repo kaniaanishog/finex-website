@@ -1,12 +1,10 @@
 <!-- Version 1.0.0 cards and connections +instagram reeel integration on cards -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="--primary-color" />
+  <meta name="theme-color" content="#071f27" />
   <title> Finex Solutions | Ease Your Finance </title>
 
   <!-- Brand Fonts (Google alternatives to your board) -->
@@ -92,7 +90,7 @@
       </div>
     </section>
 
-        <!-- SERVICES SECTION -->
+    <!-- SERVICES SECTION -->
     <section class="section section--soft" id="services">
       <div class="section__inner">
         <h2 class="section__title">Services We Offer</h2>
@@ -260,7 +258,7 @@
           A few words from people who trusted Finex Solutions with their money decisions.
         </p>
 
-        <!-- TEXT TESTIMONIALS -->
+        <!-- TEXT TESTIMONIALS 01-->
         <div class="grid grid--testimonials">
           <article class="card card--testimonial">
             <p class="card__quote">
@@ -270,7 +268,7 @@
             </p>
             <p class="card__author">Rahul &amp; Ananya · Home Loan &amp; Insurance</p>
           </article>
-
+            <!-- TEXT TESTIMONIALS 02 -->
           <article class="card card--testimonial">
             <p class="card__quote">
               “For my son’s studies abroad, they helped us with education loan planning,
@@ -279,7 +277,7 @@
             </p>
             <p class="card__author">Mrs. Shah · Parent of Overseas Student</p>
           </article>
-
+          <!-- TEXT TESTIMONIALS 03 -->
           <article class="card card--testimonial">
             <p class="card__quote">
               “As a small business we needed working capital and someone to keep our GST and
@@ -389,16 +387,23 @@
           <p class="section__subtitle">We simplify finances through reels. Swipe to explore!</p>
           <a href="https://www.instagram.com/finexsolutions/" target="_blank" class="btn btn--secondary">Follow Us</a>
         </div>
-        <div class="insta-swapper">
-          <iframe id="reel-frame" src="https://www.instagram.com/reel/DALmTcyOZ58/embed" frameborder="0" allowfullscreen></iframe>
+        <div class="carousel-wrapper">
+          <div class="insta-swapper">
+            <iframe
+              id="reel-frame"
+              src="https://www.instagram.com/reel/DALmTcyOZ58/embed"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          </div>
+
+          <!-- Buttons stay directly under the reel frame -->
+          <div class="carousel-controls">
+            <button id="prev-btn" type="button" aria-label="Previous reel">‹</button>
+            <button id="next-btn" type="button" aria-label="Next reel">›</button>
+          </div>
         </div>
       </div>
-      <div class="carousel-controls">
-        <button id="prev-reel" class="carousel-btn">‹</button>
-        <button id="next-reel" class="carousel-btn">›</button>
-      </div>
-      <div class="carousel-dots" id="reel-dots"></div>
-      <div class="toggle-autoplay" id="autoplay-toggle">Pause Autoplay</div>
     </section>
 
     <!-- CONTACT SECTION -->
@@ -508,88 +513,6 @@
     })();
   </script>
 
-  <script async src="https://www.instagram.com/embed.js"></script>
-  <script>
-    const reelUrls = [
-      "https://www.instagram.com/reel/DALmTcyOZ58/embed",
-      "https://www.instagram.com/reel/C89ljf3NC48/embed",
-      "https://www.instagram.com/reel/DPynavijk70/embed"
-    ];
-
-
-    let reelIndex = 0;
-    let autoplay = true;
-    const reelFrame = document.getElementById('reel-frame');
-    const dotsContainer = document.getElementById('reel-dots');
-    const toggleAutoplay = document.getElementById('autoplay-toggle');
-
-
-    function updateReel() {
-      reelFrame.src = reelUrls[reelIndex];
-      document.querySelectorAll('.dot').forEach((dot, i) => {
-        dot.classList.toggle('active', i === reelIndex);
-      });
-    }
-
-
-    function nextReel() {
-      reelIndex = (reelIndex + 1) % reelUrls.length;
-      updateReel();
-    }
-
-
-    function prevReel() {
-      reelIndex = (reelIndex - 1 + reelUrls.length) % reelUrls.length;
-      updateReel();
-    }
-
-
-    reelUrls.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.classList.add('dot');
-      if (i === 0) dot.classList.add('active');
-      dot.addEventListener('click', () => {
-        reelIndex = i;
-        updateReel();
-      });
-      dotsContainer.appendChild(dot);
-    });
-
-    document.getElementById('next-reel').addEventListener('click', () => {
-      autoplay = false;
-      updateAutoplayToggle();
-      nextReel();
-    });
-
-    document.getElementById('prev-reel').addEventListener('click', () => {
-      autoplay = false;
-      updateAutoplayToggle();
-      prevReel();
-    });
-
-    toggleAutoplay.addEventListener('click', () => {
-      autoplay = !autoplay;
-      updateAutoplayToggle();
-    });
-
-    function updateAutoplayToggle() {
-      toggleAutoplay.textContent = autoplay ? "Pause Autoplay" : "Resume Autoplay";
-    }
-
-    let interval = setInterval(() => {
-      if (autoplay) nextReel();
-    }, 5000);
-
-    reelFrame.addEventListener("click", () => {
-      autoplay = false;
-      updateAutoplayToggle();
-    });
-
-    reelFrame.addEventListener("touchstart", () => {
-      autoplay = false;
-      updateAutoplayToggle();
-    });
-  </script>
   <script>
     const navbar = document.querySelector('.navbar');
     let lastScroll = 0;
@@ -603,6 +526,94 @@
       lastScroll = currentScroll <= 0 ? 0 : currentScroll;
     });
   </script>
+
+  <script>
+    // ==============================
+    // Instagram Reel Carousel
+    // ==============================
+
+    // 1. List of reels
+    const reelUrls = [
+      "https://www.instagram.com/reel/DALmTcyOZ58/embed",
+      "https://www.instagram.com/reel/C89ljf3NC48/embed",
+      "https://www.instagram.com/reel/DPynavijk70/embed"
+    ];
+
+    let reelIndex = 0;
+    let autoplayEnabled = true;
+    let autoplayTimer = null;
+
+    const reelFrame = document.getElementById("reel-frame");
+    const prevBtn   = document.getElementById("prev-btn");
+    const nextBtn   = document.getElementById("next-btn");
+
+    // Show given reel by index, wrapping around
+    function showReel(index) {
+      reelIndex = (index + reelUrls.length) % reelUrls.length;
+      reelFrame.src = reelUrls[reelIndex];
+    }
+
+    function nextReel() {
+      showReel(reelIndex + 1);
+    }
+
+    function prevReel() {
+      showReel(reelIndex - 1);
+    }
+
+    // 2. Autoplay logic (every 6 seconds)
+    function startAutoplay() {
+      return setInterval(() => {
+        if (autoplayEnabled) {
+          nextReel();
+        }
+      }, 6000);
+    }
+
+    function pauseAutoplay() {
+      autoplayEnabled = false;
+      clearInterval(autoplayTimer);
+    }
+
+    function resumeAutoplay() {
+      if (!autoplayEnabled) {
+        autoplayEnabled = true;
+        autoplayTimer = startAutoplay();
+      }
+    }
+
+    // Start autoplay on page load
+    autoplayTimer = startAutoplay();
+
+    // 3. Smart autoplay toggle:
+    //    Every click on the iframe toggles autoplay.
+    //    In practice:
+    //      - First tap (play)  -> pause autoplay
+    //      - Second tap (pause)-> resume autoplay
+    reelFrame.addEventListener("click", () => {
+      if (autoplayEnabled) {
+        pauseAutoplay();
+      } else {
+        resumeAutoplay();
+      }
+    });
+
+    // 4. Previous / Next buttons under the reel
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => {
+        pauseAutoplay();  // user is manually browsing
+        prevReel();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => {
+        pauseAutoplay();
+        nextReel();
+      });
+    }
+  </script>
+
 
 
 </body>
