@@ -6,6 +6,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071f27" />
   <title> Finex Solutions | Ease Your Finance </title>
 
   <!-- Brand Fonts (Google alternatives to your board) -->
@@ -546,6 +547,11 @@
       clearInterval(interval); // pause auto on touch
     });
 
+    // Stop auto-play if user taps or clicks the reel
+    reelFrame.addEventListener("click", () => clearInterval(interval));
+    reelFrame.addEventListener("touchstart", () => clearInterval(interval));
+
+
     reelFrame.addEventListener("touchend", (e) => {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
@@ -579,6 +585,29 @@
 
     lastScroll = currentScroll;
   });
+
+  // Support swipe with mouse for desktop
+  let mouseDown = false;
+
+  reelFrame.addEventListener("mousedown", (e) => {
+    startX = e.clientX;
+    mouseDown = true;
+    clearInterval(interval);
+  });
+
+  document.addEventListener("mouseup", (e) => {
+    if (!mouseDown) return;
+    let diff = startX - e.clientX;
+    if (Math.abs(diff) > 50) {
+      reelIndex = (diff > 0)
+        ? (reelIndex + 1) % reelUrls.length
+        : (reelIndex - 1 + reelUrls.length) % reelUrls.length;
+      reelFrame.src = reelUrls[reelIndex];
+    }
+    interval = setInterval(nextReel, 6000);
+    mouseDown = false;
+  });
+
   </script>
 
 
