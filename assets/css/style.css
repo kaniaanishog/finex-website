@@ -1,54 +1,77 @@
-/*
-========================================
- 1. RESET AND THEME VARIABLES
-========================================
-*/
+/* ========== 1. RESET & VARIABLES ========== */
+
 :root {
-  --color-primary: #0f4c5c;
-  --color-accent:  #a9cf3a;
-  --color-bg:      #ffffff;
-  --color-soft:    #dcecc0;
-  --color-soft-alt:#f4e4cf;
-  --color-text:    #333333;
-  --color-muted:   #6b7280;
-  --color-cta-bg:  #0e3945;
-  --color-logo:    #C6A437;
+  /* Brand colors – tweak to match your exact board */
+  --color-primary: #0f4c5c;      /* deep teal for headings/nav */
+  --color-accent:  #a9cf3a;      /* lime for buttons/highlights */
+  --color-bg:      #ffffff;      /* main background */
+  --color-soft:    #dcecc0;      /* light green section */
+  --color-soft-alt:#f4e4cf;      /* beige section */
+  --color-text:    #333333;      /* body text */
+  --color-muted:   #6b7280;      /* subtle text */
+  --color-cta-bg:  #0e3945;      /* darker teal for CTA/footer */
+  --color-logo:    #C6A437;      /* logo color */
 
   --radius-lg: 18px;
   --radius-md: 12px;
   --shadow-soft: 0 12px 30px rgba(15, 76, 92, 0.12);
 
-  --font-heading: "Bebas Neue", sans-serif;
-  --font-body: "Poppins", sans-serif;
+  --font-heading: "Bebas Neue", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-body: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-script: "Pacifico", cursive;
 
   --max-width: 1120px;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
-html, body {
+body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
   color: var(--color-text);
+  background-color: var(--color-bg);
   line-height: 1.6;
 }
 
-/*
-========================================
- 2. LAYOUT & SECTIONS
-========================================
-*/
+/* ========== 2. GLOBAL ELEMENTS ========== */
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+main {
+  padding-top: 72px; /* to compensate sticky nav */
+}
+
 .section {
   padding: 4.5rem 5vw;
 }
 
 .section--soft {
   background-color: var(--color-soft);
+}
+
+.section--striped {
+  background: linear-gradient(135deg, #f9fbf7 0%, #e5f3de 100%);
 }
 
 .section--cta {
@@ -61,87 +84,118 @@ html, body {
   margin: 0 auto;
 }
 
+.section__inner--cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
 .section__title {
   font-family: var(--font-heading);
-  text-transform: uppercase;
-  font-size: 2.3rem;
   letter-spacing: 0.06em;
-  margin-bottom: 0.75rem;
+  font-size: 2.3rem;
+  text-transform: uppercase;
   color: var(--color-primary);
+  margin: 0 0 0.75rem;
+}
+
+.section__title--light {
+  color: #ffffff;
 }
 
 .section__subtitle {
-  color: var(--color-muted);
   max-width: 560px;
-  margin-bottom: 2rem;
+  margin: 0 0 2.5rem;
+  color: var(--color-muted);
 }
 
-/*
-========================================
- 3. NAVBAR
-========================================
-*/
+.section__subtitle--light {
+  color: #e5e7eb;
+}
+
+/* ========== 3. NAVBAR ========== */
+
 .navbar {
   position: sticky;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
   background-color: #071f27;
-  color: white;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 5vw;
-  transition: transform 0.45s ease, box-shadow 0.25s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  justify-content: space-between;
+  padding: 0.75rem 5vw;
+  box-shadow: 0 4px 16px rgb(253, 253, 253);
 }
 
-.navbar--hidden {
-  transform: translateY(-100%);
+.navbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.navbar__logo-img {
-  height: 45px;
-  width: auto;
+.navbar__logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
 }
+
+.navbar__logo-text {
+  font-family: var(--font-heading);
+  letter-spacing: 0.08em;
+  font-size: 1.25rem;
+  color:#C6A437;
+}
+
+.navbar__logo-texas {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  color: var(--color-logo);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+  
 
 .navbar__nav {
   display: flex;
-  gap: 1.5rem;
+  align-items: center;
+  gap: 1.75rem;
+  font-size: 0.95rem;
+}
+
+.navbar__nav a {
+  font-weight: 500;
+  color: var(--color-bg);
+}
+
+.navbar__nav a:hover {
+  color: var(--color-bg);
 }
 
 .navbar__cta {
   font-size: 0.9rem;
 }
 
-.nav-link {
-  color: white;
-  font-weight: 500;
-  background: none;
-  border: none;
-  font-size: 1rem;
-  cursor: pointer;
-}
+/* ========== 4. BUTTONS ========== */
 
-.nav-link:hover {
-  color: var(--color-accent);
-}
-
-/*
-========================================
- 4. BUTTONS
-========================================
-*/
 .btn {
-  padding: 0.75rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8rem 1.6rem;
   border-radius: 999px;
+  border: 2px solid transparent;
   font-weight: 600;
   font-size: 0.95rem;
-  border: none;
   cursor: pointer;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  transition: all 0.2s ease-out;
+  transition: all 0.18s ease-out;
 }
 
 .btn--primary {
@@ -150,86 +204,772 @@ html, body {
 }
 
 .btn--primary:hover {
-  transform: translateY(-2px);
+  background-color: #a9cf3a;
+  transform: translateY(-1px);
   box-shadow: var(--shadow-soft);
 }
 
 .btn--secondary {
-  background: #fff;
-  border: 1px solid #ccc;
+  background-color: #ffffff;
   color: var(--color-primary);
+  border-color: rgba(15, 76, 92, 0.18);
+}
+
+.btn--secondary:hover {
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-soft);
 }
 
 .btn--block {
   width: 100%;
 }
 
-/*
-========================================
- 5. CAROUSEL + INSTAGRAM SWIPPER
-========================================
-*/
-.insta-swapper {
-  width: 100%;
-  max-width: 340px;
-  margin: auto;
-  height: 500px;
-  overflow: hidden;
+/* ========== 5. HERO ========== */
+
+.hero {
+  padding: 4.5rem 5vw 4rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 3rem;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
 }
 
-.insta-swapper iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
+.hero__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.90rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin-bottom: 0.8rem;
 }
 
-/*
-========================================
- 6. FOOTER
-========================================
-*/
+.hero__title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+  color: var(--color-primary);
+}
+
+.hero__tagline {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0 0 1rem;
+  color: var(--color-muted);
+}
+
+.hero__tagline-script {
+  font-family: var(--font-script);
+  font-size: 1.3rem;
+  color: var(--color-primary);
+  margin-left: 0.35rem;
+}
+
+.hero__subtitle {
+  margin: 0 0 1.75rem;
+  max-width: 520px;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.hero__visual {
+  display: flex;
+  justify-content: center;
+}
+
+.hero__card {
+  background: linear-gradient(145deg, #ffffff 0%, #e1f3ef 100%);
+  padding: 1.8rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  max-width: 320px;
+}
+
+.hero__card-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-primary);
+  margin: 0 0 0.4rem;
+  font-weight: 600;
+}
+
+.hero__card-text {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+/* ========== 6. GRIDS & CARDS ========== */
+
+.grid {
+  display: grid;
+  gap: 1.7rem;
+}
+
+.grid--services {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 2rem;
+}
+
+.grid--why {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  margin-top: 2rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 1.5rem 1.6rem;
+  box-shadow: 0 10px 26px rgba(15, 76, 92, 0.06);
+}
+
+.card--service h3,
+.card--why h3 {
+  margin-top: 0;
+  margin-bottom: 0.7rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.card--service p,
+.card--why p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+/* ========== 7. PROCESS ========== */
+
+.process {
+  list-style: none;
+  margin: 2.2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+}
+
+.process__step {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1.3rem 1.4rem;
+  border-radius: var(--radius-md);
+  background-color: #ffffff;
+  box-shadow: 0 10px 26px rgba(15, 76, 92, 0.05);
+}
+
+.process__num {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--color-accent);
+  letter-spacing: 0.08em;
+}
+
+/* ========== 8. CTA SECTION & FORM ========== */
+
+.cta__details p {
+  margin: 0.2rem 0;
+  font-size: 0.95rem;
+}
+
+.form {
+  background-color: #ffffff;
+  border-radius: var(--radius-lg);
+  padding: 1.8rem 1.6rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.35);
+  color: var(--color-text);
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.form__field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-muted);
+}
+
+.form__field input,
+.form__field select,
+.form__field textarea {
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  padding: 0.65rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
+}
+
+.form__field input:focus,
+.form__field select:focus,
+.form__field textarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(169, 207, 58, 0.28);
+}
+
+/* ========== 9. FOOTER ========== */
+
 .footer {
   background-color: #071f27;
   color: #9ca3af;
-  padding: 1.5rem 5vw;
-  text-align: center;
+  padding: 1.5rem 5vw 1.8rem;
+}
+
+.footer__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 .footer__brand {
   font-family: var(--font-heading);
   letter-spacing: 0.15em;
+  font-size: 0.9rem;
   text-transform: uppercase;
   color: #e5e7eb;
 }
 
 .footer__copy {
   font-size: 0.8rem;
+  margin: 0;
 }
 
-/*
-========================================
- 7. RESPONSIVE
-========================================
-*/
-@media (max-width: 768px) {
-  .navbar {
-    flex-direction: column;
-    align-items: center;
-    background-color: #071f27;
-    backdrop-filter: blur(8px);
+/* ========== 10. RESPONSIVE ========== */
+
+@media (max-width: 900px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .section__inner--cta {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .navbar__nav {
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 0.5rem;
+    display: none; /* simple: we can add a mobile menu later if needed */
+  }
+
+  main {
+    padding-top: 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .section {
+    padding-inline: 1.25rem;
+  }
+
+  .hero {
+    padding-inline: 1.25rem;
+  }
+
+  .form__row {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .hero__title {
     font-size: 2.3rem;
   }
+}
 
-  .section {
-    padding-inline: 1.25rem;
+
+.card--link {
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.16s ease-out, box-shadow 0.16s ease-out;
+}
+
+.card--link:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.page-header {
+  background-color: var(--color-soft);
+  padding-bottom: 2.5rem;
+}
+
+.page-header__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+}
+
+.page-header__title {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin: 0 0 0.8rem;
+}
+
+.page-header__subtitle {
+  max-width: 620px;
+  margin: 0 0 1.2rem;
+  color: var(--color-muted);
+}
+
+.page-header__back {
+  font-size: 0.85rem;
+  color: var(--color-primary);
+  font-weight: 500;
+}
+
+.page-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2rem;
+}
+
+.page-content__col h2 {
+  margin-top: 0;
+  color: var(--color-primary);
+}
+
+.page-content__col ul,
+.page-content__col ol {
+  padding-left: 1.2rem;
+}
+
+.page-content__col--highlight {
+  background-color: #f9fafb;
+  border-radius: var(--radius-lg);
+  padding: 1.6rem 1.5rem;
+  box-shadow: 0 10px 24px rgba(15, 76, 92, 0.06);
+}
+
+@media (max-width: 900px) {
+  .page-content {
+    grid-template-columns: minmax(0, 1fr);
   }
+}
+
+
+.section--soft-alt {
+  background-color: var(--color-soft-alt);
+}
+
+.grid--testimonials {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 2rem;
+}
+
+.card--testimonial {
+  position: relative;
+}
+
+.card__quote {
+  margin: 0 0 0.9rem;
+  font-size: 0.93rem;
+  color: var(--color-text);
+}
+
+.card__author {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--color-primary);
+}
+
+
+.grid--reels {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  margin-top: 2rem;
+}
+
+.reel-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background-color: #ffffff;
+  box-shadow: 0 10px 24px rgba(15, 76, 92, 0.06);
+  transition: transform 0.16s ease-out, box-shadow 0.16s ease-out;
+}
+
+.reel-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.reel-card__thumb {
+  background: radial-gradient(circle at top left, var(--color-accent), var(--color-primary));
+  height: 160px;
+  position: relative;
+}
+
+.reel-card__badge {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.reel-card__body {
+  padding: 0.9rem 1rem 1.1rem;
+}
+
+.reel-card__body p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text);
+}
+
+
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.insta-embed {
+  width: 100%;
+}
+
+/* Optional: make embeds a bit softer in the layout */
+.insta-embed .instagram-media {
+  box-shadow: 0 10px 24px rgba(15, 76, 92, 0.06);
+  border-radius: 18px !important;
+  overflow: hidden;
+}
+
+.navbar__brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.nav-item {
+  position: relative;
+}
+/* Service dropdown navigation link */
+.nav-link {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-bg);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.nav-link:hover {
+  color: var(--color-primary);
+}
+
+.nav-link--dropdown::after {
+  content: "▾";
+  font-size: 0.65rem;
+  margin-left: 0.25rem;
+}
+
+/* Dropdown panel */
+.nav-dropdown {
+  position: absolute;
+  top: 140%;
+  left: 0;
+  min-width: 220px;
+  padding: 0.6rem 0;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 14px 40px rgb(241, 241, 243);
+  display: none;
+  z-index: 200;
+}
+
+.nav-dropdown a {
+  display: block;
+  padding: 0.45rem 1rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+  white-space: nowrap;
+}
+
+.nav-dropdown a:hover {
+  background-color: #f3f4f6;
+  color: var(--color-bg);
+}
+
+/* Show on hover (desktop) */
+.nav-item--dropdown:hover .nav-dropdown {
+  display: block;
+}
+
+.insta-disclaimer {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+
+.navbar__logo-img {
+  height: 60px;           /* adjust based on your logo */
+  width: auto;
+  display: block;
+}
+
+.navbar__logo-mark {
+  display: none; /* hide the old "F" box */
+}
+
+
+.grid--testimonials {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-top: 2rem;
+}
+
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.insta-embed {
+  width: 100%;
+}
+
+.insta-embed .instagram-media {
+  box-shadow: 0 10px 24px rgba(15, 76, 92, 0.06);
+  border-radius: 18px !important;
+  overflow: hidden;
+}
+
+.insta-disclaimer {
+  margin-top: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+
+/* =======================================
+   MOBILE NAVBAR CENTER FIX
+   ======================================= */
+@media (max-width: 768px) {
+  .navbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* center everything */
+    justify-content: center;   /* vertically center */
+    text-align: center;
+    padding: 1rem 0;
+  }
+
+  .navbar__brand-link {
+    display: flex;
+    justify-content: center;   /* center the Finex logo block */
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .navbar__brand {
+    display: flex;
+    flex-direction: column;    /* stack logo + text */
+    align-items: center;
+    text-align: center;
+  }
+
+  .navbar__logo-img {
+    height: 45px;
+    margin-bottom: 0.25rem;
+  }
+
+  .navbar__logo-text {
+    font-size: 1rem;
+    justify-content: center; 
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .navbar__nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.60rem;
+    margin: 0.5rem 0;
+  }
+
+  .navbar__cta {
+    margin-top: 0.4rem;
+    align-self: center;        /* ensure button stays centered */
+  }
+}
+
+
+
+
+/**** OUR PARTNERS ****/
+
+.grid--partners {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  margin-top: 2rem;
+}
+
+.partner-card {
+  background-color: #ffffff;
+  border-radius: var(--radius-md);
+  padding: 1.6rem 1.5rem;
+  box-shadow: 0 12px 30px rgba(15, 76, 92, 0.06);
+}
+
+.partner-card h3 {
+  margin: 0 0 0.6rem;
+  font-size: 1.05rem;
+  color: var(--color-primary);
+}
+
+.partner-card p {
+  margin: 0 0 0.6rem;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.partners__logos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.5rem 0 0.4rem;
+}
+
+.partners__logos img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+  filter: grayscale(0.1);
+  opacity: 0.9;
+}
+
+.partners__note {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    background-color: #ffffffee; /* subtle translucent background */
+    backdrop-filter: blur(8px);
+  }
+}
+
+
+/* =======================================
+   SMART STICKY NAVBAR ANIMATION
+   ======================================= */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: transform 0.45s ease, box-shadow 0.25s ease;
+}
+
+.navbar--hidden {
+  transform: translateY(-100%);
+  box-shadow: none;
+}
+
+
+
+
+/* =======================================
+   Instagram Carousel 
+   ======================================= */
+
+
+.carousel-container {
+  overflow: hidden;
+  width: 100%;
+  max-width: 320px;
+  position: relative;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.carousel-item {
+  min-width: 100%;
+  flex: 0 0 auto;
+
+}
+
+.insta-carousel {
+  max-width: 320px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.insta-reel {
+  display: none;
+}
+
+.insta-reel.active {
+  display: block;
+}
+
+
+.reel-carousel {
+  overflow: hidden;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+  position: relative;
+}
+
+
+.reel-item iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+}
+
+.insta-swapper {
+  width: 100%;
+  max-width: 340px;
+  margin: auto;
+  height: 500px;
+}
+
+.insta-swapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
