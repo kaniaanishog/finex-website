@@ -397,18 +397,8 @@
         </div>
 
         <!-- RIGHT SIDE CAROUSEL -->
-        <div class="reel-carousel">
-          <div class="reel-track">
-            <div class="reel-item">
-              <iframe src="https://www.instagram.com/reel/DALmTcyOZ58/embed" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="reel-item">
-              <iframe src="https://www.instagram.com/reel/C89ljf3NC48/embed" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="reel-item">
-              <iframe src="https://www.instagram.com/reel/DPynavijk70/embed" frameborder="0" allowfullscreen></iframe>
-            </div>
-          </div>
+        <div class="insta-swapper">
+          <iframe id="reel-frame" src="https://www.instagram.com/reel/DALmTcyOZ58/embed" frameborder="0" allowfullscreen></iframe>
         </div>
 
 
@@ -530,51 +520,66 @@
       });
     })();
   </script>
-  
-  <script>
-    const track = document.querySelector('.reel-track');
-    const items = document.querySelectorAll('.reel-item');
-    let current = 0;
-    let startX = 0;
-    let isDragging = false;
 
-    function updateSlide() {
-      track.style.transform = `translateX(-${current * 100}%)`;
+  <script>
+    const reelUrls = [
+      "https://www.instagram.com/reel/DALmTcyOZ58/embed",
+      "https://www.instagram.com/reel/C89ljf3NC48/embed",
+      "https://www.instagram.com/reel/DPynavijk70/embed"
+    ];
+    
+    let reelIndex = 0;
+    const reelFrame = document.getElementById('reel-frame');
+
+    function nextReel() {
+      reelIndex = (reelIndex + 1) % reelUrls.length;
+      reelFrame.src = reelUrls[reelIndex];
     }
 
-    // Auto-advance every 6s
-    let autoplay = setInterval(() => {
-      current = (current + 1) % items.length;
-      updateSlide();
-    }, 6000);
+    // Change every 6 seconds
+    let interval = setInterval(nextReel, 6000);
 
-    // Touch swipe support
-    track.addEventListener('touchstart', (e) => {
+    // Swipe detection (mobile only)
+    let startX = 0;
+    reelFrame.addEventListener("touchstart", (e) => {
       startX = e.touches[0].clientX;
-      clearInterval(autoplay);
+      clearInterval(interval); // pause auto on touch
     });
 
-    track.addEventListener('touchend', (e) => {
-      let endX = e.changedTouches[0].clientX;
-      let diff = startX - endX;
-
+    reelFrame.addEventListener("touchend", (e) => {
+      const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
-        if (diff > 0) {
-          current = (current + 1) % items.length;
-        } else {
-          current = (current - 1 + items.length) % items.length;
-        }
-        updateSlide();
+        reelIndex = (diff > 0)
+          ? (reelIndex + 1) % reelUrls.length
+          : (reelIndex - 1 + reelUrls.length) % reelUrls.length;
+        reelFrame.src = reelUrls[reelIndex];
       }
-
-      autoplay = setInterval(() => {
-        current = (current + 1) % items.length;
-        updateSlide();
-      }, 6000);
+      interval = setInterval(nextReel, 6000);
     });
   </script>
 
+  <script>
+    let lastScroll = 0;
+    const navbar = document.querySelector('.navbar');
 
+    window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    if (currentScroll <= 0) {
+      navbar.classList.remove('navbar--hidden');
+      return;
+    }
+
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      // scrolling down
+      navbar.classList.add('navbar--hidden');
+    } else {
+      // scrolling up
+      navbar.classList.remove('navbar--hidden');
+    }
+
+    lastScroll = currentScroll;
+  });
+  </script>
 
 
 
