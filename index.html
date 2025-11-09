@@ -1,29 +1,28 @@
+<!-- Version 1.0.0 cards and connections +instagram reeel integration on cards -->
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#071f27" /> <!-- Ensures dark header color on mobile browser bar -->
-  <title>Finex Solutions | Ease Your Finance</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#071f27" />
+  <title> Finex Solutions | Ease Your Finance </title>
 
-
-  <!-- Fonts -->
+  <!-- Brand Fonts (Google alternatives to your board) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@300;400;500;600&family=Pacifico&display=swap" rel="stylesheet">
-
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="assets/img/favicon.png">
 
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="assets/css/style.css" />
 </head>
 <body>
+
   <!-- NAVBAR -->
   <header class="navbar">
-    <a href="#top" class="navbar__brand-link">
+    <a href="index.html#top" class="navbar__brand-link">
       <div class="navbar__brand">
         <img src="assets/img/finex-logo.png" alt="Finex Solutions" class="navbar__logo-img">
         <div class="navbar__text">
@@ -34,26 +33,30 @@
     </a>
 
 
-    <nav class="navbar__nav">
-      <div class="nav-item nav-item--dropdown">
-        <button class="nav-link nav-link--dropdown" type="button">Services</button>
-        <div class="nav-dropdown">
-          <a href="services-loans.html">Loans & Credit</a>
-          <a href="services-forex.html">Forex & Travel Currency</a>
-          <a href="services-insurance.html">Insurance Planning</a>
-          <a href="services-accounting.html">Accounting & Taxation</a>
-          <a href="services-business-consulting.html">Business Consulting</a>
-          <a href="services-student-sop.html">Student & SOP</a>
-        </div>
+  <nav class="navbar__nav">
+    <!-- Services dropdown -->
+    <div class="nav-item nav-item--dropdown">
+      <button class="nav-link nav-link--dropdown" type="button">
+        Services
+      </button>
+      <div class="nav-dropdown">
+        <a href="services-loans.html">Loans &amp; Credit</a>
+        <a href="services-forex.html">Forex &amp; Travel Currency</a>
+        <a href="services-insurance.html">Insurance Planning</a>
+        <a href="services-accounting.html">Accounting &amp; Taxation</a>
+        <a href="services-business-consulting.html">Business &amp; Startup Consulting</a>
+        <a href="services-student-sop.html">Student &amp; SOP Assistance</a>
       </div>
-      <a class="nav-link" href="#why">Why Finex</a>
-      <a class="nav-link" href="#process">Process</a>
-      <a class="nav-link" href="#contact">Contact</a>
-    </nav>
+    </div>
 
+    <a class="nav-link" href="why-finex.html">Why Finex</a>
+    <a class="nav-link" href="index.html#process">Process</a>
+    <a class="nav-link" href="index.html#contact">Contact</a>
+  </nav>
 
-    <a href="#contact" class="btn btn--primary navbar__cta">Book Consultation</a>
-  </header>
+  <a href="index.html#contact" class="btn btn--primary navbar__cta">Book Consultation</a>
+</header>
+
 
   <main>
 
@@ -378,24 +381,36 @@
     </section>
 
 
-      <!-- INSTAGRAM REELS SECTION -->
-    
-    <section class="section" id="instagram">
+        <!-- INSTAGRAM REELS SECTION -->
+    <section class="section " id="instagram">
       <div class="section__inner section__inner--cta">
+        
+        <!-- LEFT SIDE TEXT -->
         <div class="cta__text">
           <h2 class="section__title">From Our Instagram</h2>
-          <p class="section__subtitle">We simplify finances through reels. Swipe to explore!</p>
-          <a href="https://www.instagram.com/finexsolutions/" target="_blank" class="btn btn--secondary">Follow Us</a>
+          <p class="section__subtitle">
+            We simplify loans, forex, insurance and money tips through short reels.
+            Watch our latest video tips to understand finances better.
+          </p>
+          <a href="https://www.instagram.com/finexsolutions/" target="_blank" class="btn btn--secondary">
+            Follow Us on Instagram
+          </a>
         </div>
 
-
-        <!-- Reel Swapper Carousel -->
+        <!-- RIGHT SIDE CAROUSEL -->
         <div class="insta-swapper">
           <iframe id="reel-frame" src="https://www.instagram.com/reel/DALmTcyOZ58/embed" frameborder="0" allowfullscreen></iframe>
         </div>
+
+
+        
+
       </div>
     </section>
-  
+
+
+
+
 
 
 
@@ -507,14 +522,13 @@
     })();
   </script>
 
-  <!-- REEL CAROUSEL FUNCTIONALITY -->
   <script>
     const reelUrls = [
       "https://www.instagram.com/reel/DALmTcyOZ58/embed",
       "https://www.instagram.com/reel/C89ljf3NC48/embed",
       "https://www.instagram.com/reel/DPynavijk70/embed"
     ];
-
+    
     let reelIndex = 0;
     const reelFrame = document.getElementById('reel-frame');
 
@@ -523,55 +537,80 @@
       reelFrame.src = reelUrls[reelIndex];
     }
 
+    // Change every 6 seconds
     let interval = setInterval(nextReel, 6000);
 
-    // Pause carousel on interaction
+    // Swipe detection (mobile only)
+    let startX = 0;
+    reelFrame.addEventListener("touchstart", (e) => {
+      startX = e.touches[0].clientX;
+      clearInterval(interval); // pause auto on touch
+    });
+
+    // Stop auto-play if user taps or clicks the reel
     reelFrame.addEventListener("click", () => clearInterval(interval));
     reelFrame.addEventListener("touchstart", () => clearInterval(interval));
 
-    // Touch swipe (mobile)
-    let startX = 0;
-    reelFrame.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-    reelFrame.addEventListener("touchend", e => {
+
+    reelFrame.addEventListener("touchend", (e) => {
       const diff = startX - e.changedTouches[0].clientX;
       if (Math.abs(diff) > 50) {
-        reelIndex = diff > 0 ? (reelIndex + 1) % reelUrls.length : (reelIndex - 1 + reelUrls.length) % reelUrls.length;
+        reelIndex = (diff > 0)
+          ? (reelIndex + 1) % reelUrls.length
+          : (reelIndex - 1 + reelUrls.length) % reelUrls.length;
         reelFrame.src = reelUrls[reelIndex];
       }
       interval = setInterval(nextReel, 6000);
-    });
-
-    // Mouse swipe (desktop)
-    let mouseDown = false;
-    reelFrame.addEventListener("mousedown", e => {
-      startX = e.clientX;
-      mouseDown = true;
-      clearInterval(interval);
-    });
-    document.addEventListener("mouseup", e => {
-      if (!mouseDown) return;
-      const diff = startX - e.clientX;
-      if (Math.abs(diff) > 50) {
-        reelIndex = diff > 0 ? (reelIndex + 1) % reelUrls.length : (reelIndex - 1 + reelUrls.length) % reelUrls.length;
-        reelFrame.src = reelUrls[reelIndex];
-      }
-      interval = setInterval(nextReel, 6000);
-      mouseDown = false;
     });
   </script>
 
-  <!-- SMART NAVBAR HIDE/SHOW ON SCROLL -->
   <script>
-    const navbar = document.querySelector('.navbar');
     let lastScroll = 0;
+    const navbar = document.querySelector('.navbar');
+
     window.addEventListener('scroll', () => {
-      const curr = window.pageYOffset;
-      if (curr <= 0) return navbar.classList.remove('navbar--hidden');
-      if (curr > lastScroll && curr > 100) navbar.classList.add('navbar--hidden');
-      else navbar.classList.remove('navbar--hidden');
-      lastScroll = curr;
-    });
+    const currentScroll = window.pageYOffset;
+    if (currentScroll <= 0) {
+      navbar.classList.remove('navbar--hidden');
+      return;
+    }
+
+    if (currentScroll > lastScroll && currentScroll > 100) {
+      // scrolling down
+      navbar.classList.add('navbar--hidden');
+    } else {
+      // scrolling up
+      navbar.classList.remove('navbar--hidden');
+    }
+
+    lastScroll = currentScroll;
+  });
+
+  // Support swipe with mouse for desktop
+  let mouseDown = false;
+
+  reelFrame.addEventListener("mousedown", (e) => {
+    startX = e.clientX;
+    mouseDown = true;
+    clearInterval(interval);
+  });
+
+  document.addEventListener("mouseup", (e) => {
+    if (!mouseDown) return;
+    let diff = startX - e.clientX;
+    if (Math.abs(diff) > 50) {
+      reelIndex = (diff > 0)
+        ? (reelIndex + 1) % reelUrls.length
+        : (reelIndex - 1 + reelUrls.length) % reelUrls.length;
+      reelFrame.src = reelUrls[reelIndex];
+    }
+    interval = setInterval(nextReel, 6000);
+    mouseDown = false;
+  });
+
   </script>
+
+
 
 </body>
 </html>
